@@ -1,0 +1,46 @@
+# 习题2.1
+SELECT product_name,regist_date
+FROM product
+WHERE regist_date > '2009-4-28';
+
+# 习题2.2
+# 1) 返回product表中purchase_price为NULL值的其他内容;
+# 2) 返回product表中purchase_price不为NULL值的其他内容; 
+# 3) 报错
+
+# 习题2.3
+SELECT
+	product_name,
+	sale_price,
+	purchase_price
+FROM product
+WHERE sale_price >= purchase_price + 500;
+
+# 习题2.4
+SELECT
+	product_name,
+	product_type,
+	(sale_price*0.9 - purchase_price) AS profit
+FROM product
+WHERE sale_price*0.9-purchase_price > 100
+AND product_type IN ('办公用品','厨房用具');
+
+#———————————————练习题 第二部分——————————————#
+# 习题2.5
+# 首先SELECT语句中含聚合函数SUM(product_name),后面不能用where
+# 并且字符型字段product_name不能进行聚合
+# 最后group by 的字段应该出现在SELECT中;
+
+# 习题2.6
+SELECT
+	product_type,
+	SUM(sale_price) AS SUM,
+	SUM(purchase_price) AS SUM,
+FROM product
+GROUP BY product_type
+HAVING SUM(sale_price) > SUM(purchase_price)*1.5;
+
+# 习题2.7
+SELECT *
+FROM product
+GROUP BY regist_date DESC,sale_price;
